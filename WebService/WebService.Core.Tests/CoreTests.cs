@@ -16,19 +16,45 @@ namespace WebService.Core.Tests
         [Test]
         public void ItGetsCustomers()
         {
-            var customerService = new CustomerService();
-            var customers = customerService.GetCustomers();
+            var customerRepository = new CustomerRepository();
+            var customerService = new CustomerService(customerRepository);
+            var customers = customerService.GetCustomersWithOrdersUnder(2);
 
             Assert.NotNull(customers);
         }
     }
 
-    public class CustomerService
+    public class CustomerRepository : ICustomerRepository
     {
-        public IList<Customer> GetCustomers()
+        public IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders)
         {
             return new List<Customer>();
         }
+    }
+
+    public class CustomerService : ICustomerService
+    {
+        private readonly ICustomerRepository _customerRepository;
+        
+        public CustomerService(ICustomerRepository customerRepository)
+        {
+            _customerRepository = customerRepository;
+        }
+
+        public IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders)
+        {
+            return _customerRepository.GetCustomersWithOrdersUnder(numberOfOrders);
+        }
+    }
+
+    public interface ICustomerService
+    {
+        IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders);
+    }
+
+    public interface ICustomerRepository
+    {
+        IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders);
     }
 
     public class Customer
