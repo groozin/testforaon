@@ -1,6 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Moq;
 using NUnit.Framework;
-using WebService.Core;
+using WebService.Core.Interfaces;
+using WebService.Core.Model;
+using WebService.Core.Services;
 
 namespace WebService.Core.Tests
 {
@@ -16,49 +21,22 @@ namespace WebService.Core.Tests
         [Test]
         public void ItGetsCustomers()
         {
-            var customerRepository = new CustomerRepository();
-            var customerService = new CustomerService(customerRepository);
+            var customersList = new List<Customer>
+            {
+                new Customer { Name = "Joel Lang" },
+                new Customer { Name = "Laura Daniels" }
+            };
+
+            var customerRepository = new Mock<ICustomerRepository>();
+            customerRepository.Setup(cr => cr.GetCustomersWithOrdersUnder(2)).Returns(customersList);
+            
+            var customerService = new CustomerService(customerRepository.Object);
             var customers = customerService.GetCustomersWithOrdersUnder(2);
-
+            
             Assert.NotNull(customers);
+            Assert.AreEqual(2, customers.Count);
+            Assert.IsTrue(customers.Any(customer => customer.Name.Equals("Joel Lang", StringComparison.InvariantCulture)));
+            Assert.IsTrue(customers.Any(customer => customer.Name.Equals("Laura Daniels", StringComparison.InvariantCulture)));
         }
-    }
-
-    public class CustomerRepository : ICustomerRepository
-    {
-        public IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders)
-        {
-            return new List<Customer>();
-        }
-    }
-
-    public class CustomerService : ICustomerService
-    {
-        private readonly ICustomerRepository _customerRepository;
-        
-        public CustomerService(ICustomerRepository customerRepository)
-        {
-            _customerRepository = customerRepository;
-        }
-
-        public IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders)
-        {
-            return _customerRepository.GetCustomersWithOrdersUnder(numberOfOrders);
-        }
-    }
-
-    public interface ICustomerService
-    {
-        IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders);
-    }
-
-    public interface ICustomerRepository
-    {
-        IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders);
-    }
-
-    public class Customer
-    {
-        public string Name { get; set; }
     }
 }
