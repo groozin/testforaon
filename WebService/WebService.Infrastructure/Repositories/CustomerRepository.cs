@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using WebService.Core.Interfaces;
 using WebService.Infrastructure.DAL;
@@ -12,6 +13,7 @@ namespace WebService.Infrastructure.Repositories
         
         public CustomerRepository(Northwind context)
         {
+            if (context == null) throw new ArgumentNullException("context");
             _context = context;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using Moq;
@@ -31,6 +32,12 @@ namespace WebService.Infrastructure.Tests
             Assert.IsNotNull(list);
             Assert.IsNotEmpty(list);
             Assert.AreEqual(3, list.Count);
+        }
+
+        [Test]
+        public void ItThrowsExceptionWhenNoContextPassedToCustomerRepositoryConstructor()
+        {
+            Assert.Throws<ArgumentNullException>(() => { new CustomerRepository(null); });
         }
 
         [Test]

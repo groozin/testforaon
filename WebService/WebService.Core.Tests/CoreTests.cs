@@ -19,6 +19,12 @@ namespace WebService.Core.Tests
         }
 
         [Test]
+        public void ItThrowsExceptionWhenNoContextPassedToCustomerServiceConstructor()
+        {
+            Assert.Throws<ArgumentNullException>(() => { new CustomerService(null); });
+        }
+
+        [Test]
         public void ItGetsCustomers()
         {
             var customersList = new List<Customer>
