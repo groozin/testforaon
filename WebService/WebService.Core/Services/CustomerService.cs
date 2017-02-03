@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using WebService.Core.Interfaces;
 using WebService.Core.Model;
 
@@ -10,6 +11,8 @@ namespace WebService.Core.Services
         
         public CustomerService(ICustomerRepository customerRepository)
         {
+            if (customerRepository == null) throw new ArgumentNullException("customerRepository");
+
             _customerRepository = customerRepository;
         }
 

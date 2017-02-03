@@ -13,9 +13,15 @@ namespace WebService.Core.Tests
     public class CoreTests
     {
         [Test]
-        public void ItCanRunFirstTest()
+        public void ItCanRunFirstTestFromCore()
         {
             Assert.AreEqual(3, 3);
+        }
+
+        [Test]
+        public void ItThrowsExceptionWhenNoContextPassedToCustomerServiceConstructor()
+        {
+            Assert.Throws<ArgumentNullException>(() => { new CustomerService(null); });
         }
 
         [Test]
