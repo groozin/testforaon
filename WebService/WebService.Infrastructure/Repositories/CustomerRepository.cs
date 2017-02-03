@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using WebService.Core.Interfaces;
-using WebService.Core.Model;
+using WebService.Infrastructure.DAL;
+using Customer = WebService.Core.Model.Customer;
 
 namespace WebService.Infrastructure.Repositories
 {
@@ -8,7 +10,13 @@ namespace WebService.Infrastructure.Repositories
     {
         public IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders)
         {
-            return new List<Customer>();
+            using (var northwind = new Northwind())
+            {
+                return northwind.Customers
+                    .Where(c => c.Orders.Count < numberOfOrders)
+                    .Select(c => new Customer { Name = c.ContactName })
+                    .ToList();
+            }
         }
     }
 }
