@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{30C694
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebService.Infrastructure.Tests", "WebService.Infrastructure.Tests\WebService.Infrastructure.Tests.csproj", "{7CD8934D-A518-46BF-8E7A-981B2D75E48A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +34,10 @@ Global
 		{0910DE4E-0A54-4694-B05B-A6B155EAA969}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0910DE4E-0A54-4694-B05B-A6B155EAA969}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0910DE4E-0A54-4694-B05B-A6B155EAA969}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CD8934D-A518-46BF-8E7A-981B2D75E48A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CD8934D-A518-46BF-8E7A-981B2D75E48A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CD8934D-A518-46BF-8E7A-981B2D75E48A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CD8934D-A518-46BF-8E7A-981B2D75E48A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
