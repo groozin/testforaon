@@ -8,15 +8,19 @@ namespace WebService.Infrastructure.Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
+        private readonly Northwind _context;
+        
+        public CustomerRepository(Northwind context)
+        {
+            _context = context;
+        }
+
         public IList<Customer> GetCustomersWithOrdersUnder(int numberOfOrders)
         {
-            using (var northwind = new Northwind())
-            {
-                return northwind.Customers
-                    .Where(c => c.Orders.Count < numberOfOrders)
-                    .Select(c => new Customer { Name = c.ContactName })
-                    .ToList();
-            }
+            return _context.Customers
+                .Where(c => c.Orders.Count < numberOfOrders)
+                .Select(c => new Customer { Name = c.ContactName })
+                .ToList();
         }
     }
 }

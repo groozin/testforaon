@@ -1,5 +1,8 @@
-﻿using NUnit.Framework;
+﻿using System.Collections.Generic;
+using NUnit.Framework;
+using WebService.Infrastructure.DAL;
 using WebService.Infrastructure.Repositories;
+using Customer = WebService.Core.Model.Customer;
 
 namespace WebService.Infrastructure.Tests
 {
@@ -15,9 +18,13 @@ namespace WebService.Infrastructure.Tests
         [Test]
         public void ItGetsCustomersFromRepository()
         {
-            var repository = new CustomerRepository();
-            var list = repository.GetCustomersWithOrdersUnder(2);
-
+            IList<Customer> list = new List<Customer>();
+            using (var context = new Northwind())
+            {
+                var repository = new CustomerRepository(context);
+                list = repository.GetCustomersWithOrdersUnder(2);
+            }
+            
             Assert.IsNotNull(list);
             Assert.IsNotEmpty(list);
             Assert.AreEqual(3, list.Count);
