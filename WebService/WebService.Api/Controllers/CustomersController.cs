@@ -1,16 +1,24 @@
 ﻿using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using WebService.Core.Interfaces;
 
 namespace WebService.Api.Controllers
 {
     [EnableCors("*", "*", "*")]
     public class CustomersController : ApiController
     {
+        private readonly ICustomerService _customerService;
+
+        public CustomersController(ICustomerService customerService)
+        {
+            _customerService = customerService;
+        }
+
         [HttpGet]
         public HttpResponseMessage GetCustomers()
         {
-            var customers = new[] { new { Name = "Tomasz", Orders = "2" }, new { Name = "Tomasz", Orders = "2" }, new { Name = "Tomasz", Orders = "2" } };
+            var customers = _customerService.GetCustomersWithOrdersUnder(2);
             return Request.CreateResponse(customers);
         }
     }
