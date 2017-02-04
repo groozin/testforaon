@@ -1,20 +1,50 @@
 .App {
-  text-align: center;
+  height: 100%;
+  background: #ECE9E6; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #ECE9E6 , #FFFFFF); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #ECE9E6 , #FFFFFF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+  height: 50px;
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 100px;
   color: white;
 }
 
-.App-intro {
+header.App-header img {
+  float: left;
+  padding-right: 10px;
+}
+
+header.App-header section {
+  height: 55px;
+  padding: 5px;
+}
+
+header.App-header h2 {
+  color: black;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  padding-top: 30px;
+  font-size: 1.1em;
+}
+
+header.App-header nav {
+  background-color: #222;
+  padding: 10px;
+  padding-left: 40px;
+  font-weight: bold;
+}
+
+.App-intro article {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
   font-size: large;
 }
 
