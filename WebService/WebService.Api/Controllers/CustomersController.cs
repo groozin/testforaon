@@ -1,4 +1,4 @@
-﻿using System.Net.Http;
+﻿using System;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using WebService.Core.Interfaces;
@@ -12,14 +12,15 @@ namespace WebService.Api.Controllers
 
         public CustomersController(ICustomerService customerService)
         {
+            if (customerService == null) throw new ArgumentNullException("customerService");
             _customerService = customerService;
         }
 
         [HttpGet]
-        public HttpResponseMessage GetCustomers()
+        public IHttpActionResult GetCustomers()
         {
             var customers = _customerService.GetCustomersWithOrdersUnder(2);
-            return Request.CreateResponse(customers);
+            return Ok(customers);
         }
     }
 }
