@@ -40,11 +40,13 @@ header.App-header nav {
   font-weight: bold;
 }
 
+.App-intro {
+  padding-left: 10px;
+}
+
 .App-intro article {
-  width: 1000px;
   margin-left: auto;
   margin-right: auto;
-  text-align: center;
   font-size: large;
 }
 
