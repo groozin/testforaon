@@ -29,8 +29,8 @@ namespace WebService.Core.Tests
         {
             var customersList = new List<Customer>
             {
-                new Customer { Name = "Joel Lang" },
-                new Customer { Name = "Laura Daniels" }
+                new Customer { Name = "Joel Lang", NumberOfOrders = 0 },
+                new Customer { Name = "Laura Daniels", NumberOfOrders = 1 }
             };
 
             var customerRepository = new Mock<ICustomerRepository>();
@@ -43,6 +43,8 @@ namespace WebService.Core.Tests
             Assert.AreEqual(2, customers.Count);
             Assert.IsTrue(customers.Any(customer => customer.Name.Equals("Joel Lang", StringComparison.InvariantCulture)));
             Assert.IsTrue(customers.Any(customer => customer.Name.Equals("Laura Daniels", StringComparison.InvariantCulture)));
+            Assert.AreEqual(0, customers.First(customer => customer.Name.Equals("Joel Lang", StringComparison.InvariantCulture)).NumberOfOrders);
+            Assert.AreEqual(1, customers.First(customer => customer.Name.Equals("Laura Daniels", StringComparison.InvariantCulture)).NumberOfOrders);
         }
     }
 }

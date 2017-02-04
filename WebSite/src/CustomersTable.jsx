@@ -1,28 +1,29 @@
 import React from "react";
 import { Table, Column, Cell } from "fixed-data-table";
 import axios from "axios";
+import { config } from "./config.js"
 
 export default class CustomersTable extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      myTableData: []
+      customersOrders: []
     };
   }
 
   componentDidMount() {
     this.serverRequest = axios
-      .get("http://localhost:19780/api/customers")
+      .get(config.customersEndpointUrl)
       .then(result => {
-        this.setState({ myTableData: result.data });
+        this.setState({ customersOrders: result.data });
       });
   }
 
   render() {
     return (
       <Table
-        rowsCount={this.state.myTableData.length}
+        rowsCount={this.state.customersOrders.length}
         rowHeight={50}
         headerHeight={50}
         width={400}
@@ -32,7 +33,7 @@ export default class CustomersTable extends React.Component {
           header={<Cell>Customer</Cell>}
           cell={props => (
             <Cell {...props}>
-              {this.state.myTableData[props.rowIndex].name}
+              {this.state.customersOrders[props.rowIndex].name}
             </Cell>
           )}
           width={200}
@@ -41,7 +42,7 @@ export default class CustomersTable extends React.Component {
           header={<Cell>Number of orders</Cell>}
           cell={props => (
             <Cell {...props}>
-              {this.state.myTableData[props.rowIndex].orders}
+              {this.state.customersOrders[props.rowIndex].numberOfOrders}
             </Cell>
           )}
           width={200}

@@ -31,8 +31,8 @@ namespace WebService.Api.Tests
         {
             var customersList = new List<Customer>
             {
-                new Customer { Name = "Joel Lang" },
-                new Customer { Name = "Laura Daniels" }
+                new Customer { Name = "Joel Lang", NumberOfOrders = 0 },
+                new Customer { Name = "Laura Daniels", NumberOfOrders = 1 }
             };
             var customerService = new Mock<ICustomerService>();
             customerService.Setup(k => k.GetCustomersWithOrdersUnder(2)).Returns(customersList);
@@ -44,8 +44,8 @@ namespace WebService.Api.Tests
             Assert.IsInstanceOf<OkNegotiatedContentResult<IList<Customer>>>(result);
             var okResult = result as OkNegotiatedContentResult<IList<Customer>>;
             Assert.IsAssignableFrom<List<Customer>>(okResult.Content);
-            Assert.AreEqual(customersList.First().Name, "Joel Lang");
-
+            Assert.AreEqual("Joel Lang", customersList.First().Name);
+            Assert.AreEqual(0, customersList.First().NumberOfOrders);
         }
     }
 }
