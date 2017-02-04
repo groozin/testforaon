@@ -1,11 +1,12 @@
 {
   "name": "WebSite",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "devDependencies": {
     "react-scripts": "0.8.5"
   },
   "dependencies": {
+    "axios": "^0.15.3",
     "fixed-data-table": "^0.6.3",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"

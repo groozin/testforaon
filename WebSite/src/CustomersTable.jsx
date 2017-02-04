@@ -1,19 +1,22 @@
-import React from 'react'
-import {Table, Column, Cell} from 'fixed-data-table';
+import React from "react";
+import { Table, Column, Cell } from "fixed-data-table";
+import axios from "axios";
 
 export default class CustomersTable extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      myTableData: [
-        {name: 'Rylan', orders: 0},
-        {name: 'Amelia', orders: 0},
-        {name: 'Estevan', orders: 1},
-        {name: 'Florence', orders: 0},
-        {name: 'Tressa', orders: 1},
-      ],
+      myTableData: []
     };
+  }
+
+  componentDidMount() {
+    this.serverRequest = axios
+      .get("http://localhost:19780/api/customers")
+      .then(result => {
+        this.setState({ myTableData: result.data });
+      });
   }
 
   render() {
@@ -23,7 +26,8 @@ export default class CustomersTable extends React.Component {
         rowHeight={50}
         headerHeight={50}
         width={400}
-        maxHeight={500}>
+        maxHeight={500}
+      >
         <Column
           header={<Cell>Customer</Cell>}
           cell={props => (
