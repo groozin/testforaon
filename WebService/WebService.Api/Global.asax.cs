@@ -16,14 +16,23 @@ namespace WebService.Api
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
+            ConfigureAutoFacContainerBuilder();
+        }
+
+        private static void ConfigureAutoFacContainerBuilder()
+        {
             var builder = new ContainerBuilder();
             var config = GlobalConfiguration.Configuration;
-            
+
             builder.RegisterType<Northwind>().InstancePerLifetimeScope();
-            builder.RegisterType<CustomerRepository>().As<ICustomerRepository>().InstancePerApiControllerType(typeof(CustomersController));
-            builder.RegisterType<CustomerService>().As<ICustomerService>().InstancePerApiControllerType(typeof(CustomersController));
+            builder.RegisterType<CustomerRepository>()
+                .As<ICustomerRepository>()
+                .InstancePerApiControllerType(typeof(CustomersController));
+            builder.RegisterType<CustomerService>()
+                .As<ICustomerService>()
+                .InstancePerApiControllerType(typeof(CustomersController));
             builder.RegisterApiControllers(Assembly.GetExecutingAssembly());
-            
+
             var container = builder.Build();
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
         }
