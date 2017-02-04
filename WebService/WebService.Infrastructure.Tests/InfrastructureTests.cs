@@ -68,6 +68,7 @@ namespace WebService.Infrastructure.Tests
             Assert.IsNotEmpty(customersList);
             Assert.AreEqual(1, customersList.Count);
             Assert.AreEqual("Laura Daniels", customersList.First().Name);
+            Assert.AreEqual(1, customersList.First().NumberOfOrders);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace WebService.Infrastructure.Repositories
         {
             return _context.Customers
                 .Where(c => c.Orders.Count < numberOfOrders)
-                .Select(c => new Customer { Name = c.ContactName })
+                .Select(c => new Customer { Name = c.ContactName, NumberOfOrders = c.Orders.Count })
                 .ToList();
         }
     }
