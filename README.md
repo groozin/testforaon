@@ -1,7 +1,7 @@
 # Test application for AON
 ## Synopsis
 
-WebService uses n-tier architecture. With Core as its domain project. Infrastructure allows for data base access using Entity Framework. Api is an ASP.NET Web API project that exposes domain methods over the http.  
+**WebService** uses n-tier architecture. With **Core** as its domain project. **Infrastructure** allows for data base access using Entity Framework. **Api** is an ASP.NET Web API project that exposes domain methods over the http.  
 WebSite is built using React with the create-react-app as its jump-start. For testing it uses Jest.
 
 ## Builds
