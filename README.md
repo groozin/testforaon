@@ -1,32 +1,36 @@
-# testforaon
+# Test application for AON
 ## Synopsis
 
-At the top of the file there should be a short introduction and/ or overview that explains **what** the project is. This description should match descriptions added for package managers (Gemspec, package.json, etc.)
+WebService uses n-tier architecture. With Core as its domain project. Infrastructure allows for data base access using Entity Framework. Api is an ASP.NET Web API project that exposes domain methods over the http.  
+WebSite is built using React with the create-react-app as its jump-start. For testing it uses Jest.
 
-## Code Example
+## Builds
 
-Show what the library does as concisely as possible, developers should be able to figure out **how** your project solves their problem by looking at the code example. Make sure the API you are showing off is obvious, and that your code is short and concise.
+**Travis CI** build status for WebSite: ![status](https://img.shields.io/travis/groozin/testforaon.svg) https://travis-ci.org/groozin/testforaon  
+**Visual Studio TS** build status for WebService: ![status](https://groozin.visualstudio.com/_apis/public/build/definitions/04f14996-2086-4e5c-872f-50893dd35297/1/badge) https://groozin.visualstudio.com/test-for-aon/_build  
+**Visual Studio TS** build status for WebSite: ![status](https://groozin.visualstudio.com/_apis/public/build/definitions/04f14996-2086-4e5c-872f-50893dd35297/2/badge)https://groozin.visualstudio.com/test-for-aon/_build  
+  
+*VSTS* builds are only accessible for *authorized* users.
 
-## Motivation
+## Deployments
 
-A short description of the motivation behind the creation and maintenance of the project. This should explain **why** the project exists.
+Both WebSite and WebService are deployed to Azure App Service.  
+WebSite: http://app-testforaon.azurewebsites.net/  
+WebService: http://testforaon.azurewebsites.net/ - this is just a host for web service. Doesn't contain any service endpoint.
 
 ## Installation
 
-Provide code examples and explanations of how to get the project.
+To run WebService component use *Visual Studio 2013*.  
+To run WebSite use node and npm. Inside WebSite folder run:  
+`npm install`  
+`npm start`
 
 ## API Reference
 
-Depending on the size of the project, if it is small and simple enough the reference docs can be added to the README. For medium size to larger projects it is important to at least provide a link to where the API reference docs live.
+To query web service use the following: http://testforaon.azurewebsites.net/api/customers. It returns json.
 
 ## Tests
 
-Describe and show how to run the tests with code examples.
-
-## Contributors
-
-Let people know how they can dive into the project, include important links to things like issue trackers, irc, twitter accounts if applicable.
-
-## License
-
-A short snippet describing the license (MIT, Apache, etc.)
+Unit tests in WebService are using NUnit.  
+Unit tests in WebSite are using Jest. To run tests use npm:  
+`npm test`
